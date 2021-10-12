@@ -20,3 +20,9 @@ etc. jaja nite pare.
 <E,T> -> It can receive multiple parameter type.
 
 -> Method parater E[] Generics datatypes array
+
+-----------------------Generic Class--------------------------
+
+We can set parameter to the class. Suppose a class name box. Box can be string box or integer
+box. so we don't need to be declare two class we crate a class which take parameter as generic
+type. We pass the type (Can be Multiple by comma seperated)
