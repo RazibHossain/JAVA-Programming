@@ -1,0 +1,67 @@
+--------------------------------Java Stream----------------------------------------
+
+Stream API is used to process collection of objects(Collections,arrays). A stream supports
+various method which used for process data for desired output. It is not data structure and 
+don't change original data. Its takes a copy of data(collections,array) process them and 
+return as a stream.
+
+Data process korar jonno stream use kora hoi. jeita collection,array hishebe input nei and
+process kore same type a return kore dei.
+
+
+---------------Create a strem-----------------
+
+String[] arr = new String[]{"a", "b", "c"};
+Stream<String> stream = Arrays.stream(arr);
+
+Stream<Integer> stream = Stream.of("a", "b", "c");
+
+Stream<String> emptyStream = Stream.empty(); //creating a empty stream
+
+
+----------------Iterating a stream-------------
+
+stream.forEach(e->{
+            if(e.contains("a")){
+                System.out.println("i found a");
+            }
+        });
+
+boolean isExist = list.stream().anyMatch(element -> element.contains("a"));
+
+
+
+---------------Filtering in a stream-------------
+
+Ekta stream er upor filter/condition boshiye notun ekta stream return kora.
+
+String[] arr = new String[]{"a", "b", "c"};
+        Stream<String> stringStream = Arrays.stream(arr);
+        Stream<String> emptyStream = Stream.empty();
+        emptyStream = stringStream.filter(element -> element.contains("a"));
+
+        emptyStream.forEach(e->{
+            System.out.println(e);
+        });
+
+//output : a
+
+//same thing 
+List names = Arrays.asList("Reflection","Collection","Stream");
+List result = names.stream().filter(s->s.startsWith("S")).collect(Collectors.toList());
+
+------------------Map in a stream-----------------------
+
+Map er vitor ekta function thake ja stream elements er upor applye hoiye notun processed 
+stream return kore.
+
+List<Integer> num = Arrays.asList(1,2,3,4,5);
+        List<Integer> collect1 = num.stream().map(n -> n * 2).collect(Collectors.toList());
+        System.out.println(collect1);
+
+//map function normally kaj kore list a list kore onnotau (stream) typeu kora jai but ektu 
+vejal kore and map function er sesh a .collect(Collectors.toList()) aita add korte hoi jeita stream
+ke collection list a convert kore
+
+
+
