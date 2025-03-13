@@ -56,6 +56,85 @@ public class Driver {
         Im_Limit(numbers);
 //        9. skip                      Skips the first n elements.
         Im_Skip(numbers);
+
+
+//        Terminal Operation
+//        1. collect(Collector)-Converts stream into a collection or string
+        TM_Collection(names);
+//        2. reduce(BinaryOperator)-Combines elements into a single value
+        TM_Reduce(numbers,names);
+//          3. count()-Counts elements in the stream
+        TM_Count(names);
+//          4. min(Comparator)- Finds the minimum element
+        TM_Min(numbers);
+//          5. max(Comparator)-Finds the maximum element
+        TM_Max(numbers);
+//          6. anyMatch(Predicate)	    Checks if any element matches condition
+        TM_AnyMatch(names);
+//          7. allMatch(Predicate)	    Checks if all elements match condition
+        TM_AllMatch(names);
+//          8. noneMatch(Predicate)	    Checks if no element matches condition
+        TM_NoneMatch(names);
+//          9. findFirst()	            Retrieves the first element
+        TM_findFirst(names);
+//          10. findAny()	                Retrieves any element (useful in parallel)
+        TM_findAny(names);
+
+    }
+
+    private static void TM_findAny(List<String> names) {
+        System.out.println("10.TM_findAny");
+        boolean answer = names.stream().anyMatch(n
+                -> (n.length()>1));
+    }
+    private static void TM_findFirst(List<String> names) {
+        System.out.println("9.TM_findFirst");
+        String firstName = names.stream().findFirst().orElse("No Name");
+        System.out.println(firstName); // Output: Alice
+    }
+    private static void TM_NoneMatch(List<String> names) {
+        System.out.println("8.TM_NoneMatch");
+        boolean noNameWithZ = names.stream().noneMatch(name -> name.contains("Z"));
+        System.out.println(noNameWithZ); // Output: true if no element doesn't match
+    }
+    private static void TM_AllMatch(List<String> names) {
+        System.out.println("7.TM_AllMatch");
+        boolean allStartWithA = names.stream().allMatch(name -> name.startsWith("A"));
+        System.out.println(allStartWithA); // Output: false
+    }
+    private static void TM_AnyMatch(List<String> names) {
+        System.out.println("6.TM_AnyMatch");
+        boolean contains =  names.stream().anyMatch(str->str.length()>2);
+    }
+    private static void TM_Max(List<Integer> numbers) {
+        System.out.println("5.TM_Max");
+        Integer newNumber = numbers.stream().max(Integer::compareTo).orElse(-1);
+        System.out.println(newNumber);
+    }
+    private static void TM_Min(List<Integer> numbers) {
+        System.out.println("4.TM_Min");
+        Integer min = numbers.stream().min(Integer::compareTo).orElse(-1); /* handling empty stream by orElse(-1) */
+        System.out.println(min);
+    }
+    private static void TM_Count(List<String> names) {
+        System.out.println("3.TM_Count");
+        long count = names.stream().count();
+    }
+
+    private static void TM_Reduce(List<Integer> numbers, List<String> names) {
+        System.out.println("2.TM_Reduce");
+//        stream er upor agrregation operation chaliye single output dei. .reduce() Identity value hishebe
+//        ekta parameter nei and its mandatory for handling starting point,empty stream, parallel stream
+        int sum = numbers.stream().reduce(0, Integer::sum);
+        System.out.println(sum); // Output: 0+ arraysum
+//
+//        int sum = numbers.stream().reduce(10, Integer::sum);
+//        System.out.println(sum); // Output: 10+ arraysum
+    }
+
+    private static void TM_Collection(List<String> names) {
+        System.out.println("1.TM_Collection");
+        List<String> newNumber = names.stream().map(String::toUpperCase).collect(Collectors.toList());
     }
 
     private static void Im_Skip(List<Integer> numbers) {
