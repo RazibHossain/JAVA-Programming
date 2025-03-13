@@ -80,7 +80,29 @@ public class Driver {
 //          10. findAny()	                Retrieves any element (useful in parallel)
         TM_findAny(names);
 
+//        Problem Solving
+        SolveProblem1();
+        FindDuplicatesItem();
+        StringCharacterFrequencyFromGivenCharacter();
+        FindAverageofArray();
+        SumofAllEvenNumbers();
+
     }
+
+    private static void SumofAllEvenNumbers() {
+    }
+
+    private static void FindAverageofArray() {
+    }
+
+    private static void StringCharacterFrequencyFromGivenCharacter() {
+    }
+
+    private static void FindDuplicatesItem() {
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 2, 3, 6, 7, 3, 8, 9);
+        
+    }
+
 
     private static void TM_findAny(List<String> names) {
         System.out.println("10.TM_findAny");
@@ -215,10 +237,24 @@ public class Driver {
 //        }
 //    }
 
+    private static void SolveProblem1(){
 // Problem1
 // Given a list of employee names with some duplicates, filter out names that are shorter than 4 characters,
 // convert all names to uppercase, sort them in descending order, remove duplicates, skip the first two names,
 // and limit the result to 3 names.
+
+        List<String> empName = Arrays.asList("Razib","Sakib","Bob","Sakib","Niloy", "To","Hasnat","Esmay");
+
+        List<String> result = empName.stream().filter(name->name.length()>4).map(String::toUpperCase).sorted(Comparator.reverseOrder()).distinct()
+                .skip(2)
+                .limit(2)
+                .collect(Collectors.toList())
+                ;
+
+        System.out.println(result);
+
+    }
+
 
 
 }
