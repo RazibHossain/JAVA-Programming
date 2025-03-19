@@ -1,5 +1,6 @@
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -100,6 +101,10 @@ public class Driver {
 
     private static void FindDuplicatesItem() {
         List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 2, 3, 6, 7, 3, 8, 9);
+        HashSet<Integer> set = new HashSet<>();
+        List<Integer> duplicateItem = numbers.stream().filter(e->!set.add(e)).collect(Collectors.toList());
+        System.out.println("Duplicate Item: ");
+
         
     }
 
