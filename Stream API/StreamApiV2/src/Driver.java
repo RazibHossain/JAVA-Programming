@@ -1,7 +1,5 @@
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -81,12 +79,65 @@ public class Driver {
 //          10. findAny()	                Retrieves any element (useful in parallel)
         TM_findAny(names);
 
+//        groupby a argument to collect method not intermediate or terminal operation
+        GroupByOperation();
+
 //        Problem Solving
         SolveProblem1();
         FindDuplicatesItem();
-        StringCharacterFrequencyFromGivenCharacter();
+        ConvertStringtoCharacterStream();
+        StreamofWord();
+        FilterCharacterFromString();
+        ConvertStreamIntoString();
+        SortingLetterInString();
+        CharacterFrequencyFromGivenString();
         FindAverageofArray();
         SumofAllEvenNumbers();
+
+    }
+
+    private static void SortingLetterInString() {
+    }
+
+    private static void ConvertStreamIntoString() {
+    }
+
+    private static void FilterCharacterFromString() {
+    }
+
+    private static void StreamofWord() {
+    }
+
+    private static void ConvertStringtoCharacterStream() {
+    }
+
+    private static void GroupByOperation() {
+        List<String> g = Arrays.asList("geeks", "for", "geeks");
+//        kon word kotobar ache groupby kore tar count kora
+        Map<String, Long> result = g.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+//        grouping by collect funtion er parameter. Function.identity() hocche stream er element itself.
+         System.out.println();
+
+        List<Person> people = Arrays.asList(
+                new Person("Alice", "New York"),
+                new Person("Bob", "Los Angeles"),
+                new Person("Charlie", "New York"),
+                new Person("David", "Los Angeles"),
+                new Person("Eve", "Chicago")
+        );
+//        Kono city kk thake tar list
+        Map<String,List<Person>> result2 = people.stream().collect(Collectors.groupingBy(e->e.city));
+//        kon city te kotojon thake tar count
+        Map<String,Long> result3 = people.stream().collect(Collectors.groupingBy(e->e.city,Collectors.counting()));
+
+        System.out.println();
+//        Nested Groupby
+        Map<String, Map<Integer, List<Person>>> multiLevelGrouping = people.stream()
+                .collect(Collectors.groupingBy(
+                        person -> person.city,
+                        Collectors.groupingBy(person -> person.name.length())
+                ));
+        System.out.println();
 
     }
 
@@ -96,7 +147,19 @@ public class Driver {
     private static void FindAverageofArray() {
     }
 
-    private static void StringCharacterFrequencyFromGivenCharacter() {
+    private static void CharacterFrequencyFromGivenString() {
+//        take a string. convert it char array , ,make it stream then groupby and count
+        String ss = "Hello Razib";
+
+        Map<Character, Long> charCount = ss.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(
+                        Function.identity(),
+                        Collectors.counting()
+                ));
+
+        System.out.println();
+
     }
 
     private static void FindDuplicatesItem() {
@@ -260,6 +323,20 @@ public class Driver {
 
     }
 
+    class person{
+        String name;
+        String city;
+        person(String name, String city) {
+            this.name = name;
+            this.city = city;
+        }
 
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
 
 }
+
+
